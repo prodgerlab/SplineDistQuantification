@@ -1,0 +1,28 @@
+MODEL TRAINING
+
+1. First install the SplineDist-main folder and configure Conda enviornment using the enviornment.yml file.
+  ***REQUIRED STEPS
+      Utilizing a coding editor such as Visual Studio.
+      The installation of Anaconda to import the enviornment and dependances.
+      Training data needs to be present with raw images and manual annotations, the dataset used for this project is available at the following public domain: https://zenodo.org/records/14898025.
+
+2. After setting up the computer enviornment, organize training data in separate folder and ensure file paths are accurate in the 'config.yaml' file.
+
+3. Running the code to train the model
+  snakemake --use-singularity --singularity-args='\-\-nv' --cores 1
+
+MODEL PREDICTION AND ADJUSTMENT
+
+Step 1. Running the code below to process the cell segmentation for the various cell types.
+  snakemake -R all_predict --cores 1
+
+Step 2. Utilizing the '1.StackToImages.ijm' script, select the folder containing whole tissue images and separate them into individual channels (CD68,CD11c,CD207).
+***Separating into single channels is for utilizing the manual adjustment script.
+
+Step 3. Utilizing the '2.Manual Adjustments After SPLINEDIST.ijm' script by selecting the relevant channels and .RoiZip outputs from model prediction for each cell type
+
+DOUBLE POSITIVE CALCULATION (requires .xml file of one cell marker and .RoiZip file for the overlapping marker)
+
+Step 1. Convert ROIs for one cell type into .xml format using the script '3.Convert ROI to XML.ijm'
+
+Step 2. Run the '4.Check Overlapping Markers.ijm' script to identify the instances of marker overlap

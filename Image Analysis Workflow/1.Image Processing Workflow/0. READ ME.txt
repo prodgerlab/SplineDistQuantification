@@ -1,0 +1,33 @@
+Using this workflow convers the initial image processing steps to generat epidermis tracings, outlines for the apical and basal lines,
+and a 100µm selection from the basal line into the dermis.
+
+Step 0: Manually Trace the Epidermis and Generate Epidermis Masks
+  Open tissue image in ImageJ and using the selection brush tool to trace out the epidermis.
+  Generate a mask of the epidermis roi through the following steps: Edit → Selection → Create Mask to generate a binary mask for the epidermis.
+  Save the mask as a .tif file for all images in your dataset.
+
+Step 1: Convert the Epidermis Masks into Outline
+  Using the script '1.Convert Mask to Outline.ijm':
+  Select the input folder containing the epidermis mask images.
+  Select the output folder to save the epidermis mask outlines.
+
+Step 2: Cutting the Edges of the Epidermal Outlines
+  Open each epidermal outline image in ImageJ and using the freehand selection tool, cut the edges of the outline images separate the apical and basal edges of the epidermis.
+  Run the '2.Save Cut Outlines.ijm' macro on each image file to automatically save it ***ENSURE you are writing your path for saving within the script file***
+
+Step 3: Saving the Apical and Basal Esges Using Cut Epidermal Outlines
+  Using the script '3.Identify Apical and Basal Lines.ijm':
+  Select the input folder containing all of cut epidermis outline images.
+  Select the output folder to save the apical and basal edge masks.
+  The script will prompt the manual selection of the apical and basal edge rois for each cut outline and automatically save them to the designated folders.
+
+Step 4: Generating 100µm Selection Area from the Basal Edge in the Dermis
+  Using the script '4.100µm Dermis from Basal Edge - Epidermis Subtraction.ijm':
+  Select the input folder containing the basal edge outlines, epidermal masks, and output folder to save the 100µm dermis selections from the basal edge.
+  The script will automatically save the 100µm dermis selections as masks into a save folder
+  Open each 100µm dermis selection mask in ImageJ and using the freehand selection tool, make adjustments to ensure accuracy
+
+Step 5: Measuring Tissue Areas
+  Using the script '5.TissueAreaMeasurement.ijm'
+  Select the input folder containing the epidermis masks to quantify their areas.  
+  Select the input folder containing the 100µm dermis selections masks to quantify their areas.  

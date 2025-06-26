@@ -1,0 +1,122 @@
+# This file should contain everything to configure the workflow on a global scale.
+
+
+#this is the order of channels in the tif file
+channels:
+  - CD68
+  - CD11C
+  - CD207
+  - DAPI
+
+
+#indices here are is
+split_set:
+  training:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+    - 49
+    - 50
+  validation:
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+#relative to the input zip folder
+in_images: 
+  DAPI: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/RAW IMAGES/FOV{i}-DAPI.tif'
+  CD68: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/RAW IMAGES/FOV{i}-CD68.tif'
+  CD11C: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/RAW IMAGES/FOV{i}-CD11C.tif'
+  CD207: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/RAW IMAGES/FOV{i}-CD207.tif'
+
+
+in_multichan: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/RAW IMAGES/FOV{i}-ORIGINAL_ALL CHANNELS.tif'
+  
+
+in_masks:
+  DAPICD11C: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/BINARY/FOV{i}-DAPICD11C.tif'
+  DAPICD68: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/BINARY/FOV{i}-DAPICD68.tif'
+  DAPICD207: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/BINARY/FOV{i}-DAPICD207.tif'
+
+# -- below is not used yet
+
+# we train a diff model for each binary mask
+# if any other parameters need to be customized, then they can go under here.. 
+models:
+  DAPICD11C:
+    in_labels: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/BINARY/FOV{i} DAPICD11C.tif'
+    in_channels:
+      - DAPI
+      - CD11C
+  DAPICD68:
+    in_labels: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/BINARY/FOV{i} DAPICD68.tif'
+    in_channels:
+      - DAPI
+      - CD68
+  DAPICD207:
+    in_labels: '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FOV{i}/BINARY/FOV{i} DAPICD207.tif'
+    in_channels:
+      - DAPI
+      - CD207
+
+inference_channels:
+  - CD11C
+  - CD207
+  - CD68
+  - DAPI
+
+#maybe use samples.tsv for this?
+inference_tif:
+  - '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FullSizeImages/APM001 Region 1 Merged.tif'
+  - '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FullSizeImages/APM003_Merged.tif'
+  - '/home/prodgerlab/Desktop/Sample FOVs-Manual Counting/FullSizeImages/APM004_Merged.tif'
+
+train: True
+test: True

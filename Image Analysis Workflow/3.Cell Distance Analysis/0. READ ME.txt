@@ -1,0 +1,6 @@
+Step 1. Using apical and basal edge lines ask masks generated from Image Processing, use the '1.Get ROIs.ijm' script to conver masks into .roi files for each folder
+
+Step 2. Using the '2.Combine Single ROI To Cell.ijm', merge the .roi file and .RoiZip file containing all cell detections for each cell type. This will generate Distance Analysis ROI.zip files for each image.
+
+Step 3. Run the '3.Distances Calculation.ijm' to analyze the median/mean shotest distance of cells to the basal/apical edge
+
